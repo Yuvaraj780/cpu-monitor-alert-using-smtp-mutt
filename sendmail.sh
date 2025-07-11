@@ -1,18 +1,24 @@
 #!/bin/bash
 
-# Check if exactly 3 arguments are passed
-if [ "$#" -ne 3 ]; then
-  echo "Usage: $0 \"message body\" \"subject\" \"recipient@example.com\""
+# ------------------------------
+# USAGE:
+# ./sendmail.sh "Body text" "Subject" "recipient@gmail.com" file1.txt file2.pdf ...
+# ------------------------------
+
+if [ "$#" -lt 3 ]; then
+  echo "Usage: $0 \"body\" \"subject\" \"recipient@example.com\" [attachments...]"
   exit 1
 fi
 
 BODY="$1"
 SUBJECT="$2"
 TO="$3"
+shift 3                # Remove the first 3 arguments so "$@" now holds all files
 
-echo "Sending email to: $TO"
+echo "Sending to: $TO"
 echo "Subject: $SUBJECT"
 echo "Body: $BODY"
+echo "Attachments: $@"
 
-# Send the email with attachment
-echo "$BODY" | mutt -F ~/.muttrc -s "$SUBJECT" -a example.txt -- "$TO"
+# Send using mutt
+echo "$BODY" | mutt -F ~/.muttrc -s "$SUBJECT" -a "$@" -- "$TO"
