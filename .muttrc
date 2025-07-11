@@ -1,0 +1,7 @@
+set from = "yuviyuvaraj7639@gmail.com"
+set realname = "Yuvi"
+set smtp_url = "smtp://yuviyuvaraj7639@gmail.com@smtp.gmail.com:587/"
+set smtp_pass = "your_app_password_here"
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
